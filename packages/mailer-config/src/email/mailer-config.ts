@@ -14,7 +14,7 @@ export async function sendEmail(
 ) {
   try {
     const data = await resend.emails.send({
-      from: `Akash <onboarding@resend.dev>`,
+      from: ` <onboarding@resend.dev>`,
       to: [to],
       subject: "Zapier Clone",
       html:

@@ -1,16 +1,6 @@
-# Zapier Clone
+# AutoNexus
 
-<img src="https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/zapierlogo.png" alt="Logo">
-
-**Zapier Clone** is a microservices-based automation platform that simplifies and streamlines various workflows. The frontend is developed using Next.js, while Node.js handles the backend services. It features efficient code management with Turborepo, quick task processing with Kafka, and customizable workflows through webhooks, making the platform both powerful and user-friendly.
-
-## Demo 🎥
-
-https://github.com/user-attachments/assets/3cea80f1-f962-457c-8a28-d92ea7cb5333
-
-If the above player does not work, you can watch the demo video here:
-
-[Watch the Demo Video](https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/Zapier+Clone+Demo.mp4)
+**AutoNexus** is a microservices-based automation platform that simplifies and streamlines various workflows. The frontend is developed using Next.js, while Node.js handles the backend services. It features efficient code management with Turborepo, quick task processing with Kafka, and customizable workflows through webhooks, making the platform both powerful and user-friendly.
 
 ## Features 🌟
 
@@ -68,28 +58,6 @@ This project uses a monorepo architecture managed by Turborepo. The repository i
 
 - `@repo/zod-schemas`: Contains Zod schemas for data validation and type-safe parsing across the application.
 
-## Screenshots 📸
-
-![App Screenshot](https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/mainpage.jpg)
-
-![App Screenshot](https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/login.jpg)
-
-![App Screenshot](https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/signuppage.jpg)
-
-![App Screenshot](https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/forgotpassword.jpg)
-
-![App Screenshot](https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/dashboard.jpg)
-
-![App Screenshot](https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/sendemailselector.jpg)
-
-![App Screenshot](https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/sendsolanaselector.jpg)
-
-![App Screenshot](https://hosted-documents-akash.s3.eu-central-1.amazonaws.com/Zapier+Clone+/Zapier+CLone+github+readme+files/zapcreation.jpg)
-
-## Deployment 🚀
-
-You can access the live version of Zapier Clone here: [Live Demo](https://zapier-frontend-eight.vercel.app/)
-
 <a name="environment-setup"></a>
 
 ## Environment Setup 🛠️
@@ -129,7 +97,9 @@ To run this project, you will need to add the following environment variables to
 **4.** Dockerize the Applications and start all the containers
 
 ```
+
 docker-compose up
+
 ```
 
 The following containers will be build (if not built already) and started:
@@ -165,19 +135,25 @@ The following containers will be build (if not built already) and started:
 **4.** In the root directory of the monorepo, install the dependencies for all packages using Turborepo
 
 ```
+
 npm install
+
 ```
 
 **5.** Start a PostgreSQL container
 
 ```
-docker run --name zapier-clone-db -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
+
+docker run --name autonexus-db -e POSTGRES\_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
+
 ```
 
 - From the root directory of the monorepo run this command to automatically migrate our database and generate our type-safe Prisma client.
 
 ```
+
 turbo db:push db:generate
+
 ```
 
 Note: If you need to seed data into the database, follow these steps:
@@ -185,13 +161,17 @@ Note: If you need to seed data into the database, follow these steps:
 - From the root directory of the monorepo, navigate to the database package:
 
 ```
+
 cd packages/database
+
 ```
 
 - Run the following command to seed dummy data into the database:
 
 ```
+
 npx prisma db seed
+
 ```
 
 This will seed a `webhook` trigger and `send-solana` as well as `send-email` actions
@@ -199,31 +179,41 @@ This will seed a `webhook` trigger and `send-solana` as well as `send-email` act
 **6.** Start a Kafka container
 
 ```
-docker run --name zapier-processor-kafka -d -p 9092:9092 apache/kafka:3.7.1
+
+docker run --name autonexus-processor-kafka -d -p 9092:9092 apache/kafka:3.7.1
+
 ```
 
 Docker exec into the kafka container
 
 ```
-docker exec -it <kafka-container-id> /bin/bash
+
+docker exec -it \<kafka-container-id\> /bin/bash
+
 ```
 
 Navigate to the Kafka Binaries Directory
 
 ```
+
 cd /opt/kafka/bin
+
 ```
 
 Create the kafka topic
 
 ```
+
 ./kafka-topics.sh --create --topic zap-events --bootstrap-server localhost:9092
+
 ```
 
 **7.** Start the application in development mode
 
 ```
+
 npm run dev
+
 ```
 
 Note:- You can run this command in the root directory to start the entire application in development mode, or you can run it within individual packages if you only want to run specific parts.
@@ -235,7 +225,9 @@ Note:- You can run this command in the root directory to start the entire applic
 To build all apps and packages navigate to the parent directory, run the following command:
 
 ```
+
 npm run build
+
 ```
 
 This will build the entire monorepo, ensuring that all services are compiled and ready for deployment.
@@ -247,7 +239,9 @@ Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo
 By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), navigate to the parent directory of the turborepo then enter the following command:
 
 ```
+
 npx turbo login
+
 ```
 
 This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
@@ -255,12 +249,14 @@ This will authenticate the Turborepo CLI with your [Vercel account](https://verc
 Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
 
 ```
+
 npx turbo link
+
 ```
 
 ## Authors ✍️
 
-- [Akash](https://github.com/Akash-m-SE)
+- [Paranjay](https://github.com/xartus2004)
 
 ## Tech Stack 💻
 
